@@ -6,17 +6,17 @@ To learn how to train your own machine learning model using Edge Impulse, visit 
 
 ## **Example model**
 
-In the [`arduino_library`](https://github.com/mywdka/physical_interfaces/arduino_library) folder you can find an example model which you can use with the templates. You can import this library using the [Arduino IDE](https://docs.arduino.cc/software/ide-v2) by navigating to `Sketch` → `Include Library` → `Add .ZIP Library...`
+In the [`arduino_library`](https://github.com/mywdka/physical_interfaces/tree/main/arduino_library) folder you can find an example model which you can use with the templates. You can import this library using the [Arduino IDE](https://docs.arduino.cc/software/ide-v2) by navigating to `Sketch` → `Include Library` → `Add .ZIP Library...`
 
 ## **Arduino Template**
 
-If you are using your own Edge Impulse model, you need to change some code in the [`arduino_templates`](https://github.com/mywdka/physical_interfaces/arduino_templates) folder to make the examples work.
+If you are using your own Edge Impulse model, you need to change some code in the [`arduino_template`](https://github.com/mywdka/physical_interfaces/tree/main/arduino_template) folder to make the examples work.
 
 ### **Sender**
 
-This is the code for the sender Arduino. It means that the Arduino that is running this code will be the one you use for gesture recognition and generally is attatched to a battery so that it can be used freely. When it detects a gesture it will send it over Bluetooth to the `Receiver` arduino, which is attatched to your computer.
+This is the code for the sender Arduino. It means that the Arduino that is running this code will be the one you use for gesture recognition and generally is attached to a battery so that it can be used freely. When it detects a gesture it will send it over Bluetooth to the `Receiver` arduino, which is attached to your computer.
 
-You don't have to mess around too much with the code in the [`sender.ino`](https://github.com/mywdka/physical_interfaces/arduino_templates/sender/sender.ino) file in the [`arduino_templates/sender`](https://github.com/mywdka/physical_interfaces/arduino_templates/sender) folder. The only parts you need to change when using your own model are `line 1` and `line 15 & 16`.
+You don't have to mess around too much with the code in the [`sender.ino`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino) file in the [`arduino_template/sender`](https://github.com/mywdka/physical_interfaces/tree/main/arduino_template/sender) folder. The only parts you need to change when using your own model are [`line 1`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino#L1) and [`line 15 & 16`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino#L15&L16).
 
 **Line 1**
 
@@ -33,13 +33,13 @@ const char* deviceServiceUuid = "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a";
 const char* deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325a69";
 ```
 
-In order to connect to the receiver using Bluetooth, you need to create you own unique identifier (or UUID). This is a long string of random characters. Its the easiest to generate two UUIDs using [this website](https://www.uuidgenerator.net/). Make sure to swap `"75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a"` and `"f938f115-3221-43f3-a577-673541325a69"` with your own, newly generated UUIDs. Don't forget to add double qoutes `" "` around the UUID.
+In order to connect to the receiver using Bluetooth, you need to create you own unique identifier (or UUID). This is a long string of random characters. Its the easiest to generate two UUIDs using [this website](https://www.uuidgenerator.net/). Make sure to swap `"75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a"` and `"f938f115-3221-43f3-a577-673541325a69"` with your own, newly generated UUIDs. Don't forget to add double quotes `" "` around the UUID.
 
 ### **Receiver**
 
-This is the template file that will receive the detected gestures from the `Sender` Arduino. The Arduino that will be running this code is generally attatched to your computer as it sends over the detected gestured through the Serial port to Processing.
+The [`receiver.ino`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/receiver/receiver.ino) in the [`arduino_template/receiver`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/receiver) folder is the template file that will receive the detected gestures from the `Sender` Arduino. The Arduino that will be running this code is generally attached to your computer as it sends over the detected gestured through the Serial port to Processing.
 
-There are some lines you need to change in order to make it work with your own model. The rest is up to you! The lines you **need** to change are `line 7 & 8`, `lines 14-20` and the `switch` statement at `line 69`.
+There are some lines you need to change in order to make it work with your own model. The rest is up to you! The lines you **need** to change are [`line 7 & 8`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/receiver/receiver.ino#L7&L8), [`lines 14-20`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/receiver/receiver.ino#L14-L20) and the `switch` statement at [`lines 77-115`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/receiver/receiver.ino#L77-L114).
 
 **Line 7 & 8**
 
@@ -48,7 +48,7 @@ const char* deviceServiceUuid = "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a";
 const char* deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325a69";
 ```
 
-These lines need to be the same as in the `sender.ino` file. Remeber the UUIDs you've generated before? Paste them here in order to make a connection between the `Sender` and `Receiver` Arduino's.
+These lines need to be the same as in your `sender.ino` file. Remember the UUIDs you've generated before? Paste them here in order to make a connection between the `Sender` and `Receiver` Arduino's.
 
 **Lines 14-20**
 
@@ -64,7 +64,7 @@ enum
 
 These are the labels you've picked while collecting data in Edge Impulse. You will need to sort your labels on alphabetical order and but them in this `enum`. This will map the detected labels to a number, so that you can use these numbers in Processing to for example show a video when we receive the number 1.
 
-Let say I've trained a model with the labels: `runnning`, `walking`, `dancing` and `sleeping`. My `enum` will look like this:
+Let say I've trained a model with the labels: `running`, `walking`, `dancing` and `sleeping`. My `enum` will look like this:
 
 ```cpp
 enum
