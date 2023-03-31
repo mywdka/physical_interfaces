@@ -6,6 +6,8 @@
 #define CONVERT_G_TO_MS2 9.80665f
 #define MAX_ACCEPTED_RANGE 2.0f
 
+float confidence_threshold = 0.8;
+
 static bool debug_nn = false;
 
 /*
@@ -215,7 +217,7 @@ int gestureDetection()
 
   for (int ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++)
   {
-    if (result.classification[ix].value > 0.8)
+    if (result.classification[ix].value > confidence_threshold)
     {
       gesture_index = ix;
       Serial.println(" ");
