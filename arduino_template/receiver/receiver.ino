@@ -1,4 +1,4 @@
-#include <ArduinoBLE.h> // Bluetooth library
+#include <ArduinoBLE.h> // CMD + Click to get the library: http://librarymanager/All#Arduino_LSM9DS1
 
 /*
   Change "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a" to match the sender.
@@ -14,7 +14,7 @@ const char *deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325
 enum
 {
   GESTURE_NONE = -1,
-  GESTURE_SLEEP = 0,
+  GESTURE_IDLE = 0,
   GESTURE_UPDOWN = 1,
   GESTURE_WAVE = 2,
 };
@@ -76,6 +76,18 @@ void writeGesture(int gesture)
 {
   switch (gesture)
   {
+  case GESTURE_IDLE:
+    /*
+      Detected 'GESTURE_IDLE'
+      1: Turn on RED LED
+      2: Send GESTURE_IDLE (0) to Processing
+    */
+    digitalWrite(LEDR, LOW);
+    digitalWrite(LEDG, HIGH);
+    digitalWrite(LEDB, HIGH);
+
+    Serial.println(GESTURE_IDLE);
+    break;
   case GESTURE_UPDOWN:
     /*
       Detected 'GESTURE_UPDOWN'
@@ -102,7 +114,7 @@ void writeGesture(int gesture)
     break;
   default:
     /*
-      Detected 'GESTURE_NONE' or 'GESTURE_SLEEP'
+      Detected 'GESTURE_NONE'
       1: Turn on RED LED
       2: Send GESTURE_NONE (-1) to Processing
     */

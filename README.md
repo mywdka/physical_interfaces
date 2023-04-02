@@ -6,7 +6,7 @@ To learn how to train your own machine learning model using Edge Impulse, visit 
 
 ## **Example model**
 
-In the [`arduino_library`](https://github.com/mywdka/physical_interfaces/tree/main/arduino_library) folder you can find an example model which you can use with the templates. You can import this library using the [Arduino IDE](https://docs.arduino.cc/software/ide-v2) by navigating to `Sketch` → `Include Library` → `Add .ZIP Library...`
+In the [`model`](https://github.com/mywdka/physical_interfaces/tree/main/model) folder you can find an example model which you can use with the templates. You can import this library using the [Arduino IDE](https://docs.arduino.cc/software/ide-v2) by navigating to `Sketch` → `Include Library` → `Add .ZIP Library...`
 
 ## **Arduino Template**
 

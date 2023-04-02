@@ -1,9 +1,9 @@
-#include <rfri-motion_inferencing.h>
-#include <ArduinoBLE.h>       // Bluetooth library
-#include <Arduino_LSM9DS1.h>  //Click here to get the library: http://librarymanager/All#Arduino_LSM9DS1
-#include <Arduino_LPS22HB.h>  //Click here to get the library: http://librarymanager/All#Arduino_LPS22HB
-#include <Arduino_HTS221.h>   //Click here to get the library: http://librarymanager/All#Arduino_HTS221
-#include <Arduino_APDS9960.h> //Click here to get the library: http://librarymanager/All#Arduino_APDS9960
+#include <interfaces-fusion_inferencing.h> // Your own Edge Impulse library
+#include <ArduinoBLE.h>       // CMD + Click to get the library: http://librarymanager/All#Arduino_LSM9DS1
+#include <Arduino_LSM9DS1.h>  // CMD + Click to get the library: http://librarymanager/All#Arduino_LSM9DS1
+#include <Arduino_LPS22HB.h>  // CMD + Click to get the library: http://librarymanager/All#Arduino_LPS22HB
+#include <Arduino_HTS221.h>   // CMD + Click to get the library: http://librarymanager/All#Arduino_HTS221
+#include <Arduino_APDS9960.h> // CMD + Click to get the library: http://librarymanager/All#Arduino_APDS9960
 
 /*
   Change "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a" to match the receiver.
@@ -12,6 +12,9 @@
 const char *deviceServiceUuid = "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a";
 const char *deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325a69";
 
+/*
+  How confident your trained model should be in order to send the label.
+*/
 float confidence_threshold = 0.8;
 
 int gesture = -1;
@@ -570,7 +573,7 @@ uint8_t poll_HTS(void)
 uint8_t poll_BARO(void)
 {
 
-  data[11] = BARO.readPressure(); // (PSI/MILLIBAR/KILOPASCAL) default kPa
+  data[11] = BARO.readPressure();
   return 0;
 }
 
