@@ -1,6 +1,6 @@
 # **Physical Interfaces**
 
-This repository has all the code you need to get started with creating a physical interface using an [Edge Impulse](https://edgeimpulse.com/) machine learning model on a [Arduino micro-controller (Nano 33 BLE Sense)](https://docs.arduino.cc/hardware/nano-33-ble-sense) and [Processing](https://processing.org/).
+This repository has all the code you need to get started with creating a physical interface using an [Edge Impulse](https://edgeimpulse.com/) machine learning model on an [Arduino microcontroller (Nano 33 BLE Sense)](https://docs.arduino.cc/hardware/nano-33-ble-sense) and [Processing](https://processing.org/).
 
 To learn how to train your own machine learning model using Edge Impulse, visit [our wiki](https://interactionstation.wdka.hro.nl/wiki/Motion_recognition_for_the_Arduino)
 
@@ -14,7 +14,7 @@ If you are using your own Edge Impulse model, you need to change some code in th
 
 ### **Sender**
 
-This is the code for the sender Arduino. It means that the Arduino that is running this code will be the one you use for gesture recognition and generally is attached to a battery so that it can be used freely. When it detects a gesture it will send it over Bluetooth to the `Receiver` arduino, which is attached to your computer.
+This is the code for the sender Arduino. It means that the Arduino that is running this code will be the one you use for gesture recognition and generally is attached to a battery so that it can be used freely. When it detects a gesture, it will send it over Bluetooth to the `Receiver` Arduino, which is attached to your computer.
 
 You don't have to mess around too much with the code in the [`sender.ino`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino) file in the [`arduino_template/sender`](https://github.com/mywdka/physical_interfaces/tree/main/arduino_template/sender) folder. The only parts you need to change when using your own model are [`line 1`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino#L1) and [`line 15 & 16`](https://github.com/mywdka/physical_interfaces/blob/main/arduino_template/sender/sender.ino#L15&L16).
 
@@ -33,7 +33,7 @@ const char* deviceServiceUuid = "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a";
 const char* deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325a69";
 ```
 
-In order to connect to the receiver using Bluetooth, you need to create you own unique identifier (or UUID). This is a long string of random characters. Its the easiest to generate two UUIDs using [this website](https://www.uuidgenerator.net/). Make sure to swap `"75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a"` and `"f938f115-3221-43f3-a577-673541325a69"` with your own, newly generated UUIDs. Don't forget to add double quotes `" "` around the UUID.
+In order to connect to the receiver using Bluetooth, you need to create your own unique identifier (or UUID). This is a long string of random characters. It's the easiest to generate two UUIDs using [this website](https://www.uuidgenerator.net/). Make sure to swap `"75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a"` and `"f938f115-3221-43f3-a577-673541325a69"` with your own, newly generated UUIDs. Don't forget to add double quotes `" "` around the UUID.
 
 ### **Receiver**
 
@@ -62,7 +62,7 @@ enum
 };
 ```
 
-These are the labels you've picked while collecting data in Edge Impulse. You will need to sort your labels on alphabetical order and but them in this `enum`. This will map the detected labels to a number, so that you can use these numbers in Processing to for example show a video when we receive the number 1.
+These are the labels you've picked while collecting data in Edge Impulse. You will need to sort your labels in alphabetical order and put them in this `enum`. This will map the detected labels to a number, so that you can use these numbers in Processing to for example show a video when we receive the number 1.
 
 Let say I've trained a model with the labels: `running`, `walking`, `dancing` and `sleeping`. My `enum` will look like this:
 
