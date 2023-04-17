@@ -7,18 +7,6 @@
 const char *deviceServiceUuid = "75f8c43b-fd35-4cd0-9790-3d38a2bd2a8a";
 const char *deviceServiceCharacteristicUuid = "f938f115-3221-43f3-a577-673541325a69";
 
-/*
-  Change this to your model its labels in alpabetical order
-  'GESTURE_NONE' needs to stay.
-*/
-enum
-{
-  GESTURE_NONE = -1,
-  GESTURE_IDLE = 0,
-  GESTURE_UPDOWN = 1,
-  GESTURE_WAVE = 2,
-};
-
 int gesture = -1;
 
 BLEService gestureService(deviceServiceUuid);
@@ -74,55 +62,5 @@ void loop()
 */
 void writeGesture(int gesture)
 {
-  switch (gesture)
-  {
-  case GESTURE_IDLE:
-    /*
-      Detected 'GESTURE_IDLE'
-      1: Turn on RED LED
-      2: Send GESTURE_IDLE (0) to Processing
-    */
-    digitalWrite(LEDR, LOW);
-    digitalWrite(LEDG, HIGH);
-    digitalWrite(LEDB, HIGH);
-
-    Serial.println(GESTURE_IDLE);
-    break;
-  case GESTURE_UPDOWN:
-    /*
-      Detected 'GESTURE_UPDOWN'
-      1: Turn on GREEN LED
-      2: Send GESTURE_UPDOWN (1) to Processing
-    */
-    digitalWrite(LEDR, HIGH);
-    digitalWrite(LEDG, LOW);
-    digitalWrite(LEDB, HIGH);
-
-    Serial.println(GESTURE_UPDOWN);
-    break;
-  case GESTURE_WAVE:
-    /*
-      Detected 'GESTURE_WAVE'
-      1: Turn on BLUE LED
-      2: Send GESTURE_WAVE (2) to Processing
-    */
-    digitalWrite(LEDR, HIGH);
-    digitalWrite(LEDG, HIGH);
-    digitalWrite(LEDB, LOW);
-
-    Serial.println(GESTURE_WAVE);
-    break;
-  default:
-    /*
-      Detected 'GESTURE_NONE'
-      1: Turn on RED LED
-      2: Send GESTURE_NONE (-1) to Processing
-    */
-    digitalWrite(LEDR, LOW);
-    digitalWrite(LEDG, HIGH);
-    digitalWrite(LEDB, HIGH);
-
-    Serial.println(GESTURE_NONE);
-    break;
-  }
+  Serial.println(gesture);
 }
